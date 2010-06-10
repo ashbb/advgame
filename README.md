@@ -94,37 +94,112 @@ A Game class which owns the Map.
 
 Example usage of the Game class:
 
-	game = Game.new(rooms, player)
+	game = Game.new(map, player)
 
 Second
 ------
 An Implementer class. The Implementer is, in effect, the software equivalent of you - the person who programmed the game. It stands above all other objects and can look down upon and manipulate the entire world of the game with a godlike omniscience. Another way to think of the Implementer is as a sort of chess-player moving pieces (the various objects) around on a board (the map). This means that only one special object, the Implementer, owns the game and needs to know where each object is (i.e. in which Room) and how to move it from one Room to another.
 
-The Implementer starts by initializing the game, then, in response to commands to move the player (or, in principle, any other object of the Actor class) in a specific direction, it looks for an exit in the current Room (given by the player's position in the map - game.map.rooms[player.position]) and, if it is a positive number, it alters the player's position to the map index given by the new number, otherwise (if the number is -1) there is no exit in that direction and a reply is returned to say so.
+The Implementer starts by initializing the game, then, in response to commands to move the player (or, in principle, any other object of the Actor class) in a specific direction, it looks for an exit in the current Room (given by the player's position in the map - game.map[player.position]) and, if it is a positive number, it alters the player's position to the map index given by the new number, otherwise (if the number is -1) there is no exit in that direction and a reply is returned to say so.
+
+- define six classes, Thing, Room, Map, Actor, Game, Implementer
+- save your code to the file named adv_game.rb
+
+Now, let us test this simple Adventure game by simulating user interaction.
+
+	# test.rb
+	STDOUT.sync = true
+	require 'adv_game'
+	
+	player = Actor.new "Loogink", "Ruby Lover Creature", 0
+	imp = Implementer.new player
+	
+	print "> "
+	until (cmd = gets.chomp).empty?
+	  puts imp.move_actor_to(player, cmd)
+	  puts imp.look_at(player)
+	  print "\n> "
+	end
 
 
-Milestone 4
------------
+Sample Game Log
+---------------
 
-Let's creat a tiny adventure game with Shoes!
+	>ruby test_snippet.rb
+	> e
+	Go East.
+	Loogink moved to the room:1.
+	Room name: Dragon's Lair
+	Description: a huge and glittering lair
+	Existed doors: South, West, East
+	
+	> e
+	Go East.
+	Loogink moved to the room:2.
+	Room name: Troll Cave
+	Description: a dank and gloomy cave
+	Existed doors: West
+	
+	> e
+	Go East.
+	No exit. Loogink stayed in the room:2.
+	Room name: Troll Cave
+	Description: a dank and gloomy cave
+	Existed doors: West
+	
+	> w
+	Go West.
+	Loogink moved to the room:1.
+	Room name: Dragon's Lair
+	Description: a huge and glittering lair
+	Existed doors: South, West, East
+	
+	> s
+	Go South.
+	Loogink moved to the room:5.
+	Room name: Mirror Room
+	Description: a room made by mirror
+	Existed doors: North, West, East
+	
+	> e
+	Go East.
+	Loogink moved to the room:6.
+	Room name: Witchy Forest
+	Description: a forest witches live in
+	Existed doors: South, West, East
+	
+	> s
+	Go South.
+	Loogink moved to the room:8.
+	Room name: The Exit
+	Description: a small hole
+	Existed doors: North
+	
+	> 
+	>Exit code: 0
+
+
+Have Fun
+--------
+
+Let's execute your `adv_game.rb` with Shoes!
+
+- git clone git://github.com/ashbb/advgame.git
+- cd advgame/lib
+- replace adv_game.rb to your code
+- run adv_on_shoes.rb with your Shoes
+
 
 Game Scenario
 -------------
 You must travel through the old mine (from The Entrance to The Exit). 
 You may issue the command n to move to the north. 
-You may likewise move in other directions by issuing the commands e (east ) or s (south) or w (west). 
+You may likewise move in other directions by issuing the commands e (east) or s (south) or w (west). 
 You may also issue the command l to look at your current location. 
 And g to get the Treasure Star.
 The commands are not case sensitive. 
 These are the only commands that the program will accept. 
 The game ends after you get the Treasure Star and find your way to The Exit and issue the l command there.
-
-
-Requirements Specification
---------------------------
-
-- define six classes, Thing, Room, Map, Actor, Game, Implementer
-- save your code to the file named adv_game.rb
 
 
 Screen Shot
@@ -136,3 +211,8 @@ Screen Shot
 
 ![advgame-snapshot3.png](http://github.com/ashbb/advgame/raw/master/imgs/advgame-snapshot3.png)
 
+
+Note
+----
+
+You can download **Shoes** from [here](http://shoes.heroku.com/downloads).
