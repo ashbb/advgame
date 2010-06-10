@@ -40,7 +40,7 @@ EOS
   keypress do |k|
     case k
       when 'n', 'e', 's', 'w'
-        @msg.text = imp.move_actor_to(player, k.to_sym) + "\n" + imp.look_at(player)
+        @msg.text = imp.move_actor_to(player, k) + "\n" + imp.look_at(player)
         @avatar.glide(@pos[player.position], :line => true) unless @avatar.playing?
       when 'l'
         @msg.text = imp.look_at player

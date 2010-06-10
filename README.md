@@ -107,7 +107,7 @@ The Implementer starts by initializing the game, then, in response to commands t
 
 Now, let us test this simple Adventure game by simulating user interaction.
 
-	# test.rb
+	# test_snippet.rb
 	STDOUT.sync = true
 	require 'adv_game'
 	
@@ -202,8 +202,8 @@ These are the only commands that the program will accept.
 The game ends after you get the Treasure Star and find your way to The Exit and issue the l command there.
 
 
-Screen Shot
------------
+Snapshots
+---------
 
 ![advgame-snapshot1.png](http://github.com/ashbb/advgame/raw/master/imgs/advgame-snapshot1.png)
 
